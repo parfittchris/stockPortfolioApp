@@ -1,12 +1,13 @@
 class Api::SessionsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def create
-        @user = User.find_by_credentials(params[:user][:email], params[:user][:password])
-
+        @user = User.find_by_credentials(params[:email], params[:password])
+        
         if @user
             login!(@user)
             render "api/users/show"
         else
-            render json ["invalid username/password combination"], status: 401
+            render json: ["invalid username/password combination"], status: 401
         end
     end
 
