@@ -19,17 +19,17 @@ class SplashPage extends React.Component {
         e.preventDefault()
 
         this.props.history.push('index')
-        this.props.login({ email: 'demoUser', password: 'password' });
-        
-        // if (this.state.type === 'Login') {
-        //   this.props.login({ email: 'demoUser', password: 'password' });
-        //   console.log('login')
-        // } else {
-        //   this.props.signUp({ email: 'demoUser', password: 'password' });
-        //   console.log('signup')
-        // }
+        this.props.login({ username: this.state.username, password: this.state.password });
     }
 
+    
+    demoLogin(e) {
+        e.preventDefault()
+
+        this.props.history.push('index')
+        this.props.login({ username: 'demoUser', password: 'password123' });
+    }
+    
     change() {
       let word = this.state.type === 'Login' ? 'Sign Up' : 'Login';
 
@@ -66,6 +66,11 @@ class SplashPage extends React.Component {
               <button>{this.state.type}</button>
             </form>
             <button onClick={this.change.bind(this)}>Change</button>
+            <button
+              onClick={this.demoLogin.bind(this)}
+            >
+              Demo User
+            </button>
           </div>
         );
     }
