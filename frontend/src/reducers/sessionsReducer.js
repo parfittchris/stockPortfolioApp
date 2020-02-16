@@ -1,6 +1,7 @@
 import { LOGOUT_USER, LOGIN_USER, SIGNUP_USER } from '../actions/types';
 
 
+
 const _nullUser = Object.freeze({
     id: null
 });

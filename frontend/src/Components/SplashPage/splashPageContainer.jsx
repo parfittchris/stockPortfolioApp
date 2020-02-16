@@ -1,14 +1,22 @@
 import { connect} from 'react-redux';
-import { loginUser } from '../../actions/session_actions';
+import { loginUser, removeErrors } from '../../actions/session_actions';
 import { signUpUser } from '../../actions/user_actions';
 
 import SplashPage from './splashPage.jsx';
 
+const mapStateToProps = state => {
+    console.log(state.errorsReducer)
+    return {
+        errors: state.errorsReducer
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return ({
         login: user => dispatch(loginUser(user)),
-        signUp: user => dispatch(signUpUser(user))
+        signUp: user => dispatch(signUpUser(user)),
+        removeErrors: () => dispatch(removeErrors())
     });
 }
 
-export default connect(null, mapDispatchToProps)(SplashPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SplashPage);

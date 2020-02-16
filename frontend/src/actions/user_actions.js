@@ -1,5 +1,5 @@
 import { signUp, searchUser } from '../util/user_util';
-import { SIGNUP_USER, GET_USER } from './types';
+import { SIGNUP_USER, GET_USER, RECEIVE_ERRORS} from './types';
 
 
 export const signUpUser = user => dispatch => signUp(user)
@@ -7,11 +7,17 @@ export const signUpUser = user => dispatch => signUp(user)
         type: SIGNUP_USER,
         user: res
     }))
-    .fail(errors => console.log(errors));
+    .fail(errors => dispatch({
+        type: RECEIVE_ERRORS,
+        errors: errors.responseJSON
+    }));
 
 export const getUser = id => dispatch => searchUser(id)
     .then(res => dispatch({
         type: GET_USER,
         user: res
     }))
-    .fail(errors => console.log(errors));
+    .fail(errors => dispatch({
+        type: RECEIVE_ERRORS,
+        errors: errors.responseJSON
+    }));

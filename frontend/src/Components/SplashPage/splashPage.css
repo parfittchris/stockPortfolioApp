@@ -11,7 +11,7 @@
     color: white;
     min-width: 25vw;
     min-height: 50vh;
-    top: 25vh;
+    top: 20vh;
     left: 37.5vw;
     background-color: rgba(63, 30, 30, 0.7);
     border-radius: 25px;
@@ -59,4 +59,17 @@
     color: rgb(255,255, 255, .5);
     text-align: center;
     font-size: 14px;
+}
+
+.error {
+    color: white;
+}
+
+#errorsBubble {
+    min-width: 40vw;
+    position: absolute;
+    bottom: 2vh;
+    left: 30vw;
+    border-radius: 10px;
+    background-color:rgb(15, 15, 48, .8);
 }

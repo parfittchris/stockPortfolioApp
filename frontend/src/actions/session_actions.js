@@ -9,7 +9,7 @@ export const loginUser = user => dispatch => login(user)
             }))
             .fail(errors => dispatch({
                 type: RECEIVE_ERRORS,
-                errors: errors.respnseJSON 
+                errors: errors.responseJSON 
             }));
 
 export const logoutUser = () => dispatch => logout()
@@ -21,3 +21,7 @@ export const logoutUser = () => dispatch => logout()
                  errors: errors.responseJSON
              }));
 
+
+export const removeErrors = () => ({
+    type: REMOVE_ERRORS
+});
