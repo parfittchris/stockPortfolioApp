@@ -6,18 +6,24 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import * as serviceWorker from './serviceWorker';
 
-const root = document.getElementById('root')
-const app = (
-    <Provider store={store}>
-        <HashRouter>
-            <App />
-        </HashRouter>
-    </Provider>
-)
+document.addEventListener('DOMContentLoaded', () => {
+    window.getState = store.getState;
 
-ReactDOM.render(app, root);
+    const root = document.getElementById('root')
+    const app = (
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+        <Provider store={store}>
+            <HashRouter>
+                <App />
+            </HashRouter>
+        </Provider>
+    )
+
+    ReactDOM.render(app, root);
+
+    // If you want your app to work offline and load faster, you can change
+    // unregister() to register() below. Note this comes with some pitfalls.
+    // Learn more about service workers: https://bit.ly/CRA-PWA
+    serviceWorker.unregister();
+
+});

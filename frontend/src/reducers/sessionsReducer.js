@@ -1,4 +1,4 @@
-import { LOGOUT_USER, LOGIN_USER} from '../actions/types';
+import { LOGOUT_USER, LOGIN_USER, SIGNUP_USER } from '../actions/types';
 
 
 const _nullUser = Object.freeze({
@@ -12,6 +12,8 @@ const sessionsReducer = (state = {}, action) => {
             return {id: action.user.id};
         case LOGOUT_USER:
             return _nullUser;
+        case SIGNUP_USER:
+            return {id: action.user.id};
         default:
             return state
     }

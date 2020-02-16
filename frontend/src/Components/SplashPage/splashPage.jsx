@@ -13,28 +13,37 @@ class SplashPage extends React.Component {
         }
         
         this.userLogin = this.userLogin.bind(this);
+        this.userSignUp = this.userSignUp.bind(this);
     }
 
+    userSignUp(e) {
+        e.preventDefault();
+        this.props.signUp({
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        })
+    }
+    
     userLogin(e) {
-        e.preventDefault()
-
-        this.props.history.push('index')
+        if (e) {
+          e.preventDefault()
+        }
         this.props.login({ username: this.state.username, password: this.state.password });
     }
-
-    
     demoLogin(e) {
         e.preventDefault()
-
-        this.props.history.push('index')
         this.props.login({ username: 'demoUser', password: 'password123' });
     }
     
-    change() {
+    changeForm() {
       let word = this.state.type === 'Login' ? 'Sign Up' : 'Login';
 
       this.setState({
-        type: word
+        type: word,
+        username: "",
+        email: "",
+        password: ""
       });
     }
 
@@ -45,34 +54,106 @@ class SplashPage extends React.Component {
     }
 
     render() {
+      if (this.state.type === 'Login') {
         return (
           <div id='splashPageComponent'>
-            <h1>Login Page</h1>
+            <h1>Stock Wallet</h1>
             <form onSubmit={this.userLogin}>
-              <label>Username</label>
-              <input
-                type='text'
-                id='loginName'
-                name='username'
-                onChange={this.handleChange.bind(this)}
-              />
-              <label>Password</label>
-              <input
-                type='text'
-                id='loginPassword'
-                name='password'
-                onChange={this.handleChange.bind(this)}
-              />
-              <button>{this.state.type}</button>
+              <p>Login</p>
+              <div className='startForm'>
+                <input
+                  type='text'
+                  className='homeInput'
+                  id='loginName'
+                  name='username'
+                  placeholder='Username'
+                  onChange={this.handleChange.bind(this)}
+                  autoComplete='off'
+                />
+                <input
+                  type='password'
+                  className='homeInput'
+                  id='loginPassword'
+                  name='password'
+                  placeholder='Password'
+                  onChange={this.handleChange.bind(this)}
+                  autoComplete='off'
+                />
+              </div>
+              <div>
+                <button className='signUpButton'>{this.state.type}</button>
+                <button
+                  className='signUpButton'
+                  onClick={this.demoLogin.bind(this)}
+                >
+                  Demo User
+                </button>
+              </div>
             </form>
-            <button onClick={this.change.bind(this)}>Change</button>
-            <button
-              onClick={this.demoLogin.bind(this)}
-            >
-              Demo User
-            </button>
+            <p>
+              Not a user? Sign up
+              <a className='link' onClick={this.changeForm.bind(this)}>
+                {' '}
+                here!
+              </a>
+            </p>
           </div>
         );
+      } else {
+          return (
+            <div id='splashPageComponent'>
+              <h1>Stock Wallet</h1>
+              <form onSubmit={this.userSignUp}>
+                <p>Sign Up</p>
+                <div className='startForm'>
+                  <input
+                    type='text'
+                    className='homeInput'
+                    id='loginName'
+                    name='username'
+                    placeholder='Username'
+                    onChange={this.handleChange.bind(this)}
+                    autoComplete='off'
+                  />
+                  <input
+                    type='text'
+                    className='homeInput'
+                    id='email'
+                    name='email'
+                    placeholder='Email'
+                    onChange={this.handleChange.bind(this)}
+                    autoComplete='off'
+                  />
+                  <input
+                    type='password'
+                    className='homeInput'
+                    id='loginPassword'
+                    name='password'
+                    placeholder='Password'
+                    onChange={this.handleChange.bind(this)}
+                    autoComplete='off'
+                  />
+                </div>
+                <div>
+                  <button className='signUpButton'>{this.state.type}</button>
+                  <button
+                    className='signUpButton'
+                    onClick={this.demoLogin.bind(this)}
+                  >
+                    Demo User
+                  </button>
+                </div>
+              </form>
+              <p>
+                Already a user? Login
+                <a className='link' onClick={this.changeForm.bind(this)}>
+          {' '}here!
+                </a>
+              </p>
+              <button onClick={console.log(this.props)}>Get state</button>
+            </div>
+          );
+        }
     }
 }
 
