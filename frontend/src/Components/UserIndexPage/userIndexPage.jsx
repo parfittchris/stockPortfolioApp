@@ -4,25 +4,24 @@ import './userIndexPage.css';
 class UserIndexPage extends React.Component {
     constructor(props) {
         super()
-        this.state = {user: null}
     }
 
     componentDidMount() {
-      this.props.getUser(this.props.userId).then(response => {
-          this.setState({
-            user: this.props.currentUser
-          });
-      });
+      this.props.getUser(this.props.userId)
     }
 
-    buttonClick() {
+    logout() {
         this.props.logout();
         this.props.history.push('/');
     }
 
+    redirect() {
+      let path = `user/${this.props.userId}`;
+      this.props.history.push(path);
+    }
 
     check() {
-      console.log(this.state)
+      console.log(this.props)
     }
 
     render() {
@@ -30,8 +29,9 @@ class UserIndexPage extends React.Component {
           <div>
             <h1>hello {}</h1>
             this is the user page
-            <button onClick={this.buttonClick.bind(this)}>Logout</button>
-            <button onClick={this.check.bind(this)}>Check Store</button>
+            <button onClick={this.logout.bind(this)}>Logout</button>
+            <button onClick={this.redirect.bind(this)}>Profile</button>
+            <button onClick={this.check.bind(this)}>Check State</button>
           </div>
         );
     }

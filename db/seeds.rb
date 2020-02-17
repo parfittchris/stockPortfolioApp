@@ -8,8 +8,31 @@
 
 
 User.destroy_all
+Stock.destroy_all
 
 ActiveRecord::Base.connection.reset_pk_sequence!('users');
+ActiveRecord::Base.connection.reset_pk_sequence!('stocks');
 
 
-u1 = User.create(username: 'demoUser', email: 'demoUser@email.com', password:'password123');
+
+u1 = User.create(username: 'demoUser', email: 'demoUser@email.com', password:'password123', money: 5000.00);
+u2 = User.create(username: 'parfittChris', email: 'parfittChris@email.com', password:'password123', money: 5000.00);
+
+s1 = Stock.create(name: 'ATF', quantity: 10, user_id: 1);
+s2 = Stock.create(name: 'MMY', quantity: 4, user_id: 1);
+s3 = Stock.create(name: 'XIX', quantity: 50, user_id: 1);
+s4 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s5 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s6 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s7 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s8 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s9 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s10 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s11 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s12 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s13 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s14 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s15 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s16 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+s17 = Stock.create(name: 'XIX', quantity: 50, user_id: 2);
+

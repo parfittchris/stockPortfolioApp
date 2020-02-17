@@ -1,0 +1,10 @@
+#userProfileComponent {
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    height: 90vh;
+    width: 90vw;
+    left: 5vw;
+    bottom: 5vh;
+    display:flex;
+}
