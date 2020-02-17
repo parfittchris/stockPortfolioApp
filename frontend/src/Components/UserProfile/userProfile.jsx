@@ -1,15 +1,19 @@
 import React from 'react';
 import Wallet from '../Wallet/walletContainer';
+import StockBuyPage from '../StockBuyPage/stockBuyContainer';
 import './userProfile.css';
 
 
-export default function userProfile(props) {
+class userProfile extends React.Component {
 
-    return (
-        <div id='userProfileComponent'>
+    render() {
+        return (
+          <div id="userProfileComponent">
             <Wallet />
-            <Wallet />
-        </div>
-    ); 
+            <StockBuyPage />
+          </div>
+        ); 
+  }
 }
 
+export default userProfile;

@@ -4,3 +4,9 @@ body {
      background-size: 100vw 100vh;
      font-family: 'Libre Baskerville', serif;
 }    
+/* 
+.activeComponent {
+    border: 2px solid blue;
+    width: 100px;
+    z-index: 10;
+} */

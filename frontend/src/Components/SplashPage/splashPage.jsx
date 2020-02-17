@@ -25,7 +25,8 @@ class SplashPage extends React.Component {
     this.props.signUp({
       username: this.state.username,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      money: 5000
     });
   }
 

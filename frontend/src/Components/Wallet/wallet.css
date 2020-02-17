@@ -2,6 +2,9 @@
     width: 100%;
     height: 100%;
     border-right: 1px solid lightgray;
+    border-radius:20px;
+    display: relative;
+    z-index: 0;
 }
 
 #walletContents {
@@ -10,26 +13,31 @@
     flex-direction: column;
     align-items: center;
     padding-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     height: 50%;
 }
 
 #stockSection {
     overflow-y: scroll;
-    max-height: 300px;
+    max-height: 40%;
+}
+
+#tableHeader {
+    border-bottom: 3px solid gray;
 }
 
 #portfolioTable {
     margin: 0 auto;
-    margin-bottom: 30px;
     border-collapse: collapse;
     width: 90%;
     text-align: center;
+    overflow-y: auto;
+    max-height: 40%;
 }
 
-td {
-    border-bottom: 1px solid black;
-    padding: 2px;
-    padding-top: 10px;
+th {
+     padding: 5px;
 }
 
 .stockRow:nth-child(2n+1){
@@ -39,6 +47,7 @@ td {
 .stockRow:hover {
     background-color: rgba(12, 12, 182, 0.5);
     cursor: pointer;
+    transition-delay: .125s;
 }
 
 
@@ -50,4 +59,3 @@ td {
     width: 200px;
     border-radius: 50%;
 }
-

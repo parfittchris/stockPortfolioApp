@@ -5,7 +5,6 @@ import { signUpUser } from '../../actions/user_actions';
 import SplashPage from './splashPage.jsx';
 
 const mapStateToProps = state => {
-    console.log(state.errorsReducer)
     return {
         errors: state.errorsReducer
     }

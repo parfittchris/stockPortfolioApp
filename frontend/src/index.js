@@ -7,7 +7,8 @@ import store from './store/store';
 import * as serviceWorker from './serviceWorker';
 
 document.addEventListener('DOMContentLoaded', () => {
-    window.getState = store.getState;
+    window.getState = store.getState;    
+    console.log(window.localStorage)
 
     const root = document.getElementById('root')
     const app = (
@@ -27,3 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
     serviceWorker.unregister();
 
 });
+
+
