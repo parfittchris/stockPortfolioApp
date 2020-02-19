@@ -120,10 +120,10 @@ class SplashPage extends React.Component {
             </form>
             <p>
               Not a user? Sign up
-              <a className='link' onClick={this.changeForm.bind(this)}>
+              <button className='link' onClick={this.changeForm.bind(this)}>
                 {' '}
                 here!
-              </a>
+              </button>
             </p>
           </div>
           <ul id='errorsBubble'></ul>
@@ -177,10 +177,10 @@ class SplashPage extends React.Component {
             </form>
             <p>
               Already a user? Login
-              <a className='link' onClick={this.changeForm.bind(this)}>
+              <b className='link' onClick={this.changeForm.bind(this)}>
                 {' '}
                 here!
-              </a>
+              </b>
             </p>
           </div>
           <ul id='errorsBubble'></ul>

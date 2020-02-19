@@ -8,7 +8,30 @@
 
 #availableCash {
     text-align: center;
-    height: 20%;
+    margin-top: 10%;
+    height: 10%;
+}
+
+#searchForm {
+    height: 10%;
+    border: 1px solid black;
+    /* text-align: center; */
+}
+
+#searchForm > input {
+    outline: none;
+    width: 40%;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 40%;
+}
+
+.changeButton {
+    border: none;
+    color: green;
+    cursor:pointer;
 }
 
 .companyInfo {
@@ -58,3 +81,4 @@ button:active {
 button:focus {
     outline:none;
 }
+

@@ -8,7 +8,7 @@ export const BUY = 'BUY';
 export const UPDATE = 'UPDATE';
 export const SELL = 'SELL';
 export const GET_STOCK = 'GET_STOCK';
-
+export const GET_ALL_TRANSACTIONS = 'GET_ALL_TRANSACTIONS';
 
 
 

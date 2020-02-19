@@ -8,7 +8,6 @@ class StockBuyPage extends React.Component {
       stock: {},
       user: 0,
       cash: 0,
-      key: 'pk_7d93d6f153d84381b7721aca7e46d09c'
     };
   }
 
@@ -36,8 +35,6 @@ class StockBuyPage extends React.Component {
     e.preventDefault();
     const quantity = parseInt(document.getElementById("purchaseQty").value);
     const allTickers = this.state.user.followed_stocks.map(stock => stock.name);
-    console.log(quantity);
-    console.log(this.state.cash);
 
     if (quantity > 0 && this.state.cash > (quantity * this.state.stock.latestPrice)) {
       const stock = {
@@ -46,12 +43,22 @@ class StockBuyPage extends React.Component {
         user_id: this.state.user.id,
         price: this.state.stock.latestPrice
       };
-      console.log(stock)
+
       if (allTickers.includes(stock.name)) {
           this.props.updateCurrentStock(stock);
       } else {
           this.props.buyNewStock(stock);
       }
+
+      const transaction = {
+        user_id: this.state.user.id,
+        transactionType: 'buy',
+        quantity: quantity,
+        price: this.state.stock.latestPrice,
+        stock: this.state.stock.symbol
+      }
+
+      this.props.createTransaction(transaction);
     }
   }
 
@@ -67,13 +74,15 @@ class StockBuyPage extends React.Component {
     }).fail(() => alert('Stock not found'));
   }
 
-  check() {
-    console.log(this.state)
+
+  changeForm() {
+    this.props.setType('transactions')
   }
 
   render() {
     return (
       <div id='stockBuyComponent' onClick={this.setActive.bind(this)}>
+        <div>Buy Stocks | <button onClick={this.changeForm.bind(this)} className="changeButton">Transactions</button></div>
         <p id='availableCash'>Available Cash: ${this.state.cash}</p>
         <form id="searchForm" onSubmit={this.getStock.bind(this)}>
             <label>Search</label>
@@ -90,9 +99,7 @@ class StockBuyPage extends React.Component {
             <button type="submit">Buy</button>
             </div>
           </form>
-          <button onClick={this.check.bind(this)}>check</button>
         </div>
-        <a href="https://iexcloud.io" id="iexCredit">Data provided by IEX Cloud</a>
       </div>
     );
   }

@@ -18,6 +18,18 @@
     height: 45%;
 }
 
+.highPrice {
+    color: rgb(6, 105, 6);
+}
+
+.lowPrice {
+    color: rgb(131, 8, 8);
+}
+
+.stockPrice {
+    color: black;
+}
+
 .stockSection {
     overflow-y: scroll;
     max-height: 40%;

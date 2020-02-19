@@ -46,26 +46,25 @@ class Wallet extends React.Component {
 
       this.state.stockNames.forEach(stock => {
         this.props.fetchStock(stock.name).then(res => {
-          const newStock = {
-            name: res.stock.companyName,
-            ticker: res.stock.symbol,
-            quantity: stock.quantity,
-            price: res.stock.latestPrice
+          value += res.stock.latestPrice * stock.quantity;
+          allStocks.push(res);
+          let stockClass
+          if (res.stock.latestPrice > (res.stock['open'] || res.stock['previousClose'])) {
+            stockClass = 'highPrice';
+          } else if (res.stock.latestPrice < (res.stock['open'] || res.stock['previousClose'])) {
+            stockClass = 'lowPrice';
+          } else {
+            stockClass = 'stockPrice'
           }
-          
-
-          value += newStock['price'] * newStock['quantity'];
-
-          allStocks.push(newStock);
 
           let row = document.createElement('tr');
           row.classList.add('stockRow');
-          row.setAttribute('data-name', newStock['name']);
+          row.setAttribute('data-name', res.stock.companyName);
           row.innerHTML = `
-                      <td class="stockName">${newStock['ticker']}</td>
-                      <td class="stockQty">${newStock['quantity']}</td>
-                      <td class="stockPrice">$${newStock['price'].toFixed(2)}</td>
-                      <td class="totalPrice">$${(newStock['price']* newStock['quantity']).toFixed(2)}</td>`;
+                      <td class="stockName">${res.stock.symbol}</td>
+                      <td class="stockQty" >${stock.quantity}</td>
+                      <td class="${stockClass}">$${res.stock.latestPrice.toFixed(2)}</td>
+                      <td class="totalPrice">$${(res.stock.latestPrice.toFixed(2) * stock.quantity).toFixed(2)}</td>`;
           row.onclick = this.selectStock.bind(this);
           table.appendChild(row);
           
@@ -102,22 +101,25 @@ class Wallet extends React.Component {
 
     const name = e.currentTarget.dataset.name;
     const qty = e.currentTarget.getElementsByClassName('stockQty')[0].innerHTML;
-    const price = e.currentTarget.getElementsByClassName('stockPrice')[0].innerHTML;
 
-    const selectedStock = {
-      name,
-      qty,
-      price
-    }
-    this.setState({selected: selectedStock});
+    const selected = this.state.stocks.filter(stock => {
+      return stock.stock.companyName === name;
+    })[0];
+
+    selected['quantity'] = qty;
+
+    this.setState({ 
+      selected
+    });
   }
 
   sellForm() {
       if (this.state.selected) {
         return (
           <form id="sellForm" onSubmit={this.handleSubmit.bind(this)} autoComplete="off">
-            <h3>Sell {this.state.selected.name} Shares</h3>
-            <p> Current Shares: {this.state.selected.qty} | Current Share Price: {this.state.selected.price}</p>
+            <h3>Sell {this.state.selected.stock['companyName']} Shares</h3>
+            <p>Opening Price: ${this.state.selected.stock['open'] || this.state.selected.stock['previousClose']} | Current Share Price: ${this.state.selected.stock['latestPrice']}</p>
+            <p> Current Shares: {this.state.selected['quantity']}</p>
             <label>How many shares do you want to sell?</label>
             <input id="sellInput" type='number'/>
             <button type="submit" id="sellButton">Sell</button>
@@ -128,16 +130,16 @@ class Wallet extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     const sellQuantity = parseInt(document.getElementById("sellInput").value);
-    const userQuantity = parseInt(this.state.selected.qty);
+    const userQuantity = parseInt(this.state.selected.quantity);
+    console.log(sellQuantity, userQuantity)
 
     if (sellQuantity <= userQuantity) {
       const stock = {
-        name: this.state.selected.name,
+        name: this.state.selected.stock.symbol,
         quantity: (sellQuantity * -1),
         user_id: this.props.userId,
-        price: this.state.selected.price,
+        price: this.state.selected.stock.latestPrice,
       };
 
       if (sellQuantity === userQuantity) {
@@ -145,6 +147,16 @@ class Wallet extends React.Component {
       } else {
         this.props.updateCurrentStock(stock);
       }
+
+      const transaction = {
+        user_id: this.props.userId,
+        transactionType: 'sell',
+        quantity: sellQuantity,
+        price: this.state.selected.stock.latestPrice,
+        stock: this.state.selected.stock.symbol
+      }
+
+      this.props.createTransaction(transaction);
     }
   }
 
@@ -161,7 +173,6 @@ class Wallet extends React.Component {
             <table id='portfolioTable'></table>
           </div>
           <div id='sellStock'>{this.sellForm()}</div>
-          <a href="https://iexcloud.io">IEX Cloud</a>
         </div>
     );
   }
