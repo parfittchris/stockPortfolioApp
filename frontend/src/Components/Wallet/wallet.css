@@ -15,12 +15,17 @@
     padding-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
-    height: 50%;
+    height: 45%;
 }
 
-#stockSection {
+.stockSection {
     overflow-y: scroll;
     max-height: 40%;
+}
+
+.stockSectionActive {
+    overflow-y: scroll;
+    max-height: 30%;
 }
 
 #tableHeader {
@@ -32,8 +37,6 @@
     border-collapse: collapse;
     width: 90%;
     text-align: center;
-    overflow-y: auto;
-    max-height: 40%;
 }
 
 th {
@@ -55,7 +58,35 @@ th {
     background-image: url("../../assets/defaultuser.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
+}
+
+#sellForm {
+    text-align: center;
+}
+
+#sellInput {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 10%;
+    margin: 3%;
+    text-align: center;
+    font-size: 18px;
+}
+
+#sellButton {
+    height: 30px;
+    width: 10%;
+    border-radius: 5px;
+    background-color: rgb(185, 44, 44);
+    color: white;
+    font-weight: 700;
+    border: 1px solid black;
+}
+
+#sellButton:active {
+    background-color: rgb(107, 22, 22);
 }

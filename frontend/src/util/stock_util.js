@@ -23,3 +23,10 @@ export const sellStock = stock => (
         data: stock
     })
 );
+
+export const fetchStock = stock => (
+    $.ajax({
+        method: 'GET',
+        url: `https://cloud.iexapis.com/stable/stock/${stock}/quote?token=pk_7d93d6f153d84381b7721aca7e46d09c`
+    })
+);

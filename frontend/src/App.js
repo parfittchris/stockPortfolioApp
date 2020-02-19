@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import SplashPage from './Components/SplashPage/splashPageContainer';
 import IndexPage from './Components/UserIndexPage/userIndexContainer';
-import ProfilePage from './Components/UserProfile/userProfile';
+import ProfilePage from './Components/UserProfile/userProfileContainer';
 
 function App() {
   return (

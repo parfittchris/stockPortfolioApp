@@ -7,6 +7,8 @@ export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const BUY = 'BUY';
 export const UPDATE = 'UPDATE';
 export const SELL = 'SELL';
+export const GET_STOCK = 'GET_STOCK';
+
 
 
 

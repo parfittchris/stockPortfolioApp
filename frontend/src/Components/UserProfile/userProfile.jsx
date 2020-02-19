@@ -5,12 +5,28 @@ import './userProfile.css';
 
 
 class userProfile extends React.Component {
+    constructor(props) {
+      super(props);
 
+      this.state = {user: null};
+    }
+
+    componentDidMount() {
+      this.props.getUser(this.props.userId).then(() => {
+        this.setState({
+          user: this.props.currentUser
+        });
+      });
+    }
+
+    check() {
+      console.log(this.state.user[1])
+    }
     render() {
         return (
           <div id="userProfileComponent">
-            <Wallet />
-            <StockBuyPage />
+            <Wallet user={this.state.user}/>
+            <StockBuyPage user={this.state.user} company={'FB'}/>
           </div>
         ); 
   }

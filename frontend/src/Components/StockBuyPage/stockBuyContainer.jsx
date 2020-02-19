@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/user_actions';
-import { buyNewStock, updateCurrentStock, sellAllStock } from '../../actions/stock_actions';
+import { buyNewStock, updateCurrentStock, fetchStockInfo } from '../../actions/stock_actions';
 
 import StockBuyPage from './stockBuyPage';
 
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
     getUser: id => dispatch(getUser(id)),
     buyNewStock: stock => dispatch(buyNewStock(stock)),
     updateCurrentStock: stock => dispatch(updateCurrentStock(stock)),
-    sellAllStock: stock => dispatch(sellAllStock(stock))
+    fetchStock: stock => dispatch(fetchStockInfo(stock))
   };
 };
 

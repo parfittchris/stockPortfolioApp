@@ -1,5 +1,5 @@
-import { buyStock, updateStock, sellStock } from '../util/stock_util';
-import { GET_USER } from './types';
+import { buyStock, updateStock, sellStock, fetchStock } from '../util/stock_util';
+import { GET_USER, GET_STOCK } from './types';
 
 export const buyNewStock = stock => dispatch => buyStock(stock)
              .then(res => dispatch({
@@ -23,3 +23,11 @@ export const sellAllStock = stock => dispatch => sellStock(stock)
                  user: res
              }))
              .fail(errors => console.log(errors));
+
+
+export const fetchStockInfo = stock => dispatch => fetchStock(stock)
+    .then(res => dispatch({
+        type: GET_STOCK,
+        stock: res
+    }))
+    .fail(errors => console.log(errors));
