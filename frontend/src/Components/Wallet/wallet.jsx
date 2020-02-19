@@ -35,9 +35,9 @@ class Wallet extends React.Component {
       table.innerHTML = '';
       let header = table.insertRow(0);
 
-      header.setAttribute('id', 'tableHeader');
+      header.setAttribute('class', 'tableHeader');
       header.innerHTML = `
-              <tr class='table-header'>
+              <tr>
                 <th>Stock Name</th>
                 <th>Quantity</th>
                 <th>Price/Share</th>
@@ -132,7 +132,6 @@ class Wallet extends React.Component {
     e.preventDefault();
     const sellQuantity = parseInt(document.getElementById("sellInput").value);
     const userQuantity = parseInt(this.state.selected.quantity);
-    console.log(sellQuantity, userQuantity)
 
     if (sellQuantity <= userQuantity) {
       const stock = {

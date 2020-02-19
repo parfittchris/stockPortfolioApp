@@ -7,3 +7,19 @@
     z-index: 0;
 }
 
+/* th {
+    border-bottom: 1px solid gray;
+} */
+
+#transactionsTable {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+    text-align: center;
+}
+
+.transactionsRow:nth-child(2n+1){
+    background-color: rgba(12, 12, 182, 0.15)
+}
+
+

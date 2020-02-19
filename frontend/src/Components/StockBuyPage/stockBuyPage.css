@@ -15,7 +15,6 @@
 #searchForm {
     height: 10%;
     border: 1px solid black;
-    /* text-align: center; */
 }
 
 #searchForm > input {

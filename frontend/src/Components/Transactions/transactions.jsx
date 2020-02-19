@@ -28,9 +28,9 @@ class TransactionPage extends React.Component {
         if (table) {
             table.innerHTML = '';
             let header = table.insertRow(0);
-
+            header.setAttribute('class', 'tableHeader');
             header.innerHTML = `
-                <tr class='table-header'>
+                <tr className='tableHeader'>
                     <th>Stock</th>
                     <th>Action</th>
                     <th>Quantity</th>
@@ -41,17 +41,17 @@ class TransactionPage extends React.Component {
             for (const number in this.state.transactions) {
                 const item = this.state.transactions[number];
                 let row = document.createElement('tr');
-                
+                row.classList.add('transactionsRow');
                 let date = new Date(Date.parse(item.created_at))
                 let currentDate = date.toISOString().split('T')[0];
                 let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
                 row.innerHTML = `
-                    <td class="transactionStock">${item.stock}</td>
-                    <td class="transactionType">${item.transactionType}</td>
-                    <td class="transactionQty">${item.quantity}</td>
-                    <td class="transactionType">$${item.price}</td>
-                    <td class="transactionDate">${currentDate + ' @ ' + time}</td>
+                    <td className="transactionStock">${item.stock}</td>
+                    <td className="transactionType">${item.transactionType}</td>
+                    <td className="transactionQty">${item.quantity}</td>
+                    <td className="transactionType">$${item.price}</td>
+                    <td className="transactionDate">${currentDate + ' @ ' + time}</td>
                 `
                 table.appendChild(row)
             }
