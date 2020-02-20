@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getUser } from '../../actions/user_actions';
 import { updateCurrentStock, sellAllStock, fetchStockInfo } from '../../actions/stock_actions';
 import { createTransaction } from '../../actions/transaction_actions';
-
+import { logoutUser } from '../../actions/session_actions';
 
 import Wallet from './wallet';
 
@@ -19,7 +19,8 @@ const mapDispatchToProps = dispatch => {
     updateCurrentStock: stock => dispatch(updateCurrentStock(stock)),
     sellAllStock: stock => dispatch(sellAllStock(stock)),
     fetchStock: stock => dispatch(fetchStockInfo(stock)),
-    createTransaction: transaction => dispatch(createTransaction(transaction))
+    createTransaction: transaction => dispatch(createTransaction(transaction)),
+    logout: () => dispatch(logoutUser())
   };
 };
 

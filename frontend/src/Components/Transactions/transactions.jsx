@@ -44,7 +44,16 @@ class TransactionPage extends React.Component {
                 row.classList.add('transactionsRow');
                 let date = new Date(Date.parse(item.created_at))
                 let currentDate = date.toISOString().split('T')[0];
-                let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+                let hours = date.getHours();
+                let period = 'am'
+    
+                if (hours > 12) {
+                    hours -= 12
+                    period = 'pm';
+                };
+
+                let time = `${hours}:${date.getMinutes()}:${date.getSeconds()}${period}`;
 
                 row.innerHTML = `
                     <td className="transactionStock">${item.stock}</td>
@@ -62,16 +71,16 @@ class TransactionPage extends React.Component {
         this.props.setType('buyPage')
     }
 
-    check() {
-        console.log(this.state);
-    }
-
     render() {
         return (
         <div id="transactions">
-            <button onClick={this.changeForm.bind(this)} className="changeButton">Buy Stocks</button> | Transactions
-            <button onClick={this.check.bind(this)}>Check State</button>
-            <table id="transactionsTable"></table>
+            <div className="componentTop">
+                <p className="changeButton"><button onClick={this.changeForm.bind(this)}>Buy Stocks</button> | Transactions</p>
+                <h3 id="transactionTitle">Transactions</h3>
+            </div>
+            <div id="transactionSection">
+                <table id="transactionsTable"></table>
+            </div>
         </div>
         )
     }

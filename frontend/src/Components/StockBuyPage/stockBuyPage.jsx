@@ -68,12 +68,41 @@ class StockBuyPage extends React.Component {
     const stock = document.getElementById('searchInput').value;
 
     this.props.fetchStock(stock).then((res) => {
+      console.log(res)
         this.setState({
           stock: res.stock
         });
     }).fail(() => alert('Stock not found'));
   }
 
+  renderCompany() {
+    if (this.state.stock.companyName) {
+      return (
+        <div className='companyInfo'>
+          <p>Company: {this.state.stock.companyName}</p>
+          <p>Ticker: {this.state.stock.symbol}</p>
+          <p>
+            Open Price:{' '}
+            ${this.state.stock.open || this.state.stock.previousClose} | Current
+            Price: ${this.state.stock.latestPrice}
+          </p>
+          <p></p>
+          <form onSubmit={this.purchase.bind(this)} className='buyForm'>
+            <input type='number' id='purchaseQty' />
+            <div className='formButtons'>
+              <button type='submit'>Buy</button>
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>Search Stock Symbols using the search bar</p>
+        </div>
+      )
+    }
+  }
 
   changeForm() {
     this.props.setType('transactions')
@@ -82,24 +111,17 @@ class StockBuyPage extends React.Component {
   render() {
     return (
       <div id='stockBuyComponent' onClick={this.setActive.bind(this)}>
-        <div>Buy Stocks | <button onClick={this.changeForm.bind(this)} className="changeButton">Transactions</button></div>
-        <p id='availableCash'>Available Cash: ${this.state.cash}</p>
+        <div className="componentTop">
+          <p className="changeButton">Buy Stocks |<button onClick={this.changeForm.bind(this)}>Transactions</button></p>
+          <h3 id="transactionTitle">Buy Stocks</h3>
+          <p id='availableCash'>Available Cash: ${this.state.cash}</p>
+        </div>
         <form id="searchForm" onSubmit={this.getStock.bind(this)}>
             <label>Search</label>
-            <input type="text" id="searchInput"/>
-            <button>Submit</button>
+            <input type="text" id="searchInput" autoComplete="off"/>
+            <button id="searchButton">Search</button>
         </form>
-        <div className='companyInfo'>
-          <p>Company: {this.state.stock.companyName}</p>
-          <p>Ticker: {this.state.stock.symbol}</p>
-          <p>Stock Price: ${this.state.stock.latestPrice}</p>
-          <form onSubmit={this.purchase.bind(this)} className='buyForm'>
-            <input type='number' id="purchaseQty"/>
-            <div className='formButtons'>
-            <button type="submit">Buy</button>
-            </div>
-          </form>
-        </div>
+        <div>{this.renderCompany()}</div>
       </div>
     );
   }

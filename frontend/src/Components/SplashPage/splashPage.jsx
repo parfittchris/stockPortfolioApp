@@ -43,6 +43,7 @@ class SplashPage extends React.Component {
   demoLogin(e) {
     e.preventDefault();
     this.props.login({ username: 'demoUser', password: 'password123' });
+    
   }
 
   changeForm() {
@@ -120,10 +121,10 @@ class SplashPage extends React.Component {
             </form>
             <p>
               Not a user? Sign up
-              <button className='link' onClick={this.changeForm.bind(this)}>
+              <a className='link' onClick={this.changeForm.bind(this)}>
                 {' '}
                 here!
-              </button>
+              </a>
             </p>
           </div>
           <ul id='errorsBubble'></ul>
@@ -177,10 +178,10 @@ class SplashPage extends React.Component {
             </form>
             <p>
               Already a user? Login
-              <b className='link' onClick={this.changeForm.bind(this)}>
+              <a className='link' onClick={this.changeForm.bind(this)}>
                 {' '}
                 here!
-              </b>
+              </a>
             </p>
           </div>
           <ul id='errorsBubble'></ul>

@@ -4,33 +4,46 @@
     border-left: 1px solid lightgray;
     border-radius: 20px;
     z-index: 0;
-}
-
-#availableCash {
     text-align: center;
-    margin-top: 10%;
-    height: 10%;
 }
 
 #searchForm {
     height: 10%;
-    border: 1px solid black;
+    margin-top: 10%;
 }
 
 #searchForm > input {
     outline: none;
-    width: 40%;
     border: none;
     border-bottom: 1px solid black;
     margin-left: 2%;
     margin-right: 2%;
-    width: 40%;
+    width: 30%;
+    font-size: 18px;
+    text-align: center;
+}
+
+#searchButton {
+    color: white;
+    background-color: rgba(12, 12, 182, 1);
+    height: 30px;
+    width: 10%;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+#searchButton:active {
+    background-color: rgb(7, 7, 105);
 }
 
 .changeButton {
+    font-family: arial;
+}
+
+.changeButton > button {
     border: none;
+    font-size: 16px;
     color: green;
-    cursor:pointer;
 }
 
 .companyInfo {
@@ -39,7 +52,10 @@
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
-    border: 1px solid black;
+    border: 2px solid rgb(10, 10, 95);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 10%;
 }
 
 .buyForm > input {
@@ -73,7 +89,7 @@ button:hover {
     cursor: pointer;
 }
 
-button:active {
+.formButtons > button:active {
     background-color: rgb(10, 10, 95);
 }
 

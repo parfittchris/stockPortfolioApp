@@ -5,11 +5,17 @@
     border-radius:20px;
     display: relative;
     z-index: 0;
+    text-align: center;
 }
 
-/* th {
-    border-bottom: 1px solid gray;
-} */
+#transactionSection {
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.componentTop {
+    margin: 4vh auto;
+}
 
 #transactionsTable {
     margin: 0 auto;

@@ -129,7 +129,6 @@ class Wallet extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     const sellQuantity = parseInt(document.getElementById("sellInput").value);
     const userQuantity = parseInt(this.state.selected.quantity);
 
@@ -159,20 +158,25 @@ class Wallet extends React.Component {
     }
   }
 
+  signOut() {
+    this.props.logout();
+  }
+
   render() {
     return (
-        <div id='walletComponent' onClick={this.setActive.bind(this)}>
-          <div id='walletContents'>
-            <div className='userImage' />
-            <p>{this.state.username}</p>
-            <p>Portfolio Value: ${this.state.value}</p>
-            <p>My Stock Portfolio:</p>
-          </div>
-          <div className='stockSection'>
-            <table id='portfolioTable'></table>
-          </div>
-          <div id='sellStock'>{this.sellForm()}</div>
+      <div id='walletComponent' onClick={this.setActive.bind(this)}>
+        <div id='walletContents'>
+          <div className='userImage' />
+          <button onClick={this.signOut.bind(this)}>Log Out</button>
+          <p>{this.state.username}</p>
+          <p>Portfolio Value: ${this.state.value}</p>
+          <p>My Stock Portfolio:</p>
         </div>
+        <div className='stockSection'>
+          <table id='portfolioTable'></table>
+        </div>
+        <div id='sellStock'>{this.sellForm()}</div>
+      </div>
     );
   }
 }

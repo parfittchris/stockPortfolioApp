@@ -1,4 +1,4 @@
-import { GET_STOCK } from '../actions/types';
+import { GET_STOCK, LOGOUT_USER } from '../actions/types';
 import { merge } from 'lodash';
 
 const stockReducer = (state = {}, action) => {
@@ -6,6 +6,8 @@ const stockReducer = (state = {}, action) => {
     switch (action.type) {
         case GET_STOCK:
             return merge({}, state, action.stock)
+        case LOGOUT_USER:
+            return {}
         default:
             return state
     }
