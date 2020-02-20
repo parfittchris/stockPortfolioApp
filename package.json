@@ -1,5 +1,10 @@
 {
   "name": "stockportfolio",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "build": "npm --cwd frontend install && npm --cwd frontend build",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "npm build && npm deploy"
+  }
 }
