@@ -43,8 +43,8 @@ class SplashPage extends React.Component {
   demoLogin(e) {
     e.preventDefault();
     this.props.login({ username: 'demoUser', password: 'password123' });
-    
   }
+
 
   changeForm() {
     let word = this.state.type === 'Login' ? 'Sign Up' : 'Login';

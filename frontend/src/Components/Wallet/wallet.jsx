@@ -13,6 +13,8 @@ class Wallet extends React.Component {
       stocks: [],
       selected: false
     };
+
+    this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
@@ -128,6 +130,14 @@ class Wallet extends React.Component {
       }
   }
 
+  redirect(e) {
+    this.props.history.push('/index')
+  }
+
+  refresh() {
+    this.props.refresh()
+  }
+
   handleSubmit(e) {
     const sellQuantity = parseInt(document.getElementById("sellInput").value);
     const userQuantity = parseInt(this.state.selected.quantity);
@@ -141,9 +151,9 @@ class Wallet extends React.Component {
       };
 
       if (sellQuantity === userQuantity) {
-        this.props.sellAllStock(stock);
+        this.props.sellAllStock(stock).then(this.refresh);
       } else {
-        this.props.updateCurrentStock(stock);
+        this.props.updateCurrentStock(stock).then(this.refresh);
       }
 
       const transaction = {
@@ -167,7 +177,10 @@ class Wallet extends React.Component {
       <div id='walletComponent' onClick={this.setActive.bind(this)}>
         <div id='walletContents'>
           <div className='userImage' />
-          <button onClick={this.signOut.bind(this)}>Log Out</button>
+          <div className="walletTopButtons">
+            <button onClick={this.redirect.bind(this)}>Index</button>
+            <button onClick={this.signOut.bind(this)}>Log Out</button>
+          </div>
           <p>{this.state.username}</p>
           <p>Portfolio Value: ${this.state.value}</p>
           <p>My Stock Portfolio:</p>

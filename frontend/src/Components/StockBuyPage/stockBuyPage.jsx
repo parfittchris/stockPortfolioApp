@@ -9,6 +9,8 @@ class StockBuyPage extends React.Component {
       user: 0,
       cash: 0,
     };
+
+    this.refresh = this.refresh.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +20,10 @@ class StockBuyPage extends React.Component {
       user,
       cash: user.money.toFixed(2),
     });
+  }
+
+  refresh() {
+    this.props.refresh();
   }
 
   setActive(e) {
@@ -45,7 +51,7 @@ class StockBuyPage extends React.Component {
       };
 
       if (allTickers.includes(stock.name)) {
-          this.props.updateCurrentStock(stock);
+          this.props.updateCurrentStock(stock).then(this.refresh);
       } else {
           this.props.buyNewStock(stock);
       }
@@ -64,11 +70,9 @@ class StockBuyPage extends React.Component {
 
   getStock(e) {
     e.preventDefault()
-
     const stock = document.getElementById('searchInput').value;
 
     this.props.fetchStock(stock).then((res) => {
-      console.log(res)
         this.setState({
           stock: res.stock
         });

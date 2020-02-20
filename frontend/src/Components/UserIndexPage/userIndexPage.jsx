@@ -20,18 +20,15 @@ class UserIndexPage extends React.Component {
       this.props.history.push(path);
     }
 
-    check() {
-      console.log(this.props)
-    }
-
     render() {
         return (
-          <div>
-            <h1>hello {}</h1>
-            this is the user page
-            <button onClick={this.logout.bind(this)}>Logout</button>
-            <button onClick={this.redirect.bind(this)}>Profile</button>
-            <button onClick={this.check.bind(this)}>Check State</button>
+          <div id="indexPage">
+            <h1 className="indexTitle">Welcome To Stock Wallet</h1>
+            <p className="indexText">Your personal stock organization app</p>
+            <div className="indexButtons">
+              <button onClick={this.redirect.bind(this)}>Profile</button>
+              <button onClick={this.logout.bind(this)}>Logout</button>
+            </div>
           </div>
         );
     }

@@ -26,7 +26,3 @@ s2 = Stock.create(name: 'FB', quantity: 50, user_id: 1);
 s3 = Stock.create(name: 'CMP', quantity: 50, user_id: 2);
 s5 = Stock.create(name: 'FB', quantity: 50, user_id: 2);
 
-t1 = Transaction.create(transactionType: 'buy', price: 24.31, quantity: 42, stock:'FB', user_id: 1);
-t1 = Transaction.create(transactionType: 'sell', price: 24.31, quantity: 42, stock:'FB', user_id: 1);
-t1 = Transaction.create(transactionType: 'buy', price: 24.31, quantity: 42, stock:'FB', user_id: 2);
-t1 = Transaction.create(transactionType: 'sell', price: 24.31, quantity: 42, stock:'FB', user_id: 2);

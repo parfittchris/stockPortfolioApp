@@ -14,6 +14,12 @@ class userProfile extends React.Component {
         user: null,
         component: 'buyPage'
       };
+
+      this.refresh = this.refresh.bind(this);
+    }
+
+    refresh() {
+      window.location.reload();
     }
 
     componentDidMount() {
@@ -36,9 +42,9 @@ class userProfile extends React.Component {
 
     renderComponent() {
       if (this.state.component === 'buyPage') {
-        return <StockBuyPage user={this.state.user} company={'FB'} setType={this.setType} />
+        return <StockBuyPage user={this.state.user} company={'FB'} setType={this.setType} refresh={this.refresh}/>
       } else {
-        return <Transactions user={this.state.user} setType={this.setType}/>
+        return <Transactions user={this.state.user} setType={this.setType} refresh={this.refresh}/>
       }
     }
 
@@ -46,7 +52,7 @@ class userProfile extends React.Component {
     render() {
         return (
           <div id="userProfileComponent">
-            <Wallet user={this.state.user} />
+            <Wallet user={this.state.user} refresh={this.refresh}/>
             {this.renderComponent()}
           </div>
         ); 

@@ -3,6 +3,7 @@ import { getUser } from '../../actions/user_actions';
 import { updateCurrentStock, sellAllStock, fetchStockInfo } from '../../actions/stock_actions';
 import { createTransaction } from '../../actions/transaction_actions';
 import { logoutUser } from '../../actions/session_actions';
+import { withRouter } from 'react-router';
 
 import Wallet from './wallet';
 
@@ -24,4 +25,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Wallet));
