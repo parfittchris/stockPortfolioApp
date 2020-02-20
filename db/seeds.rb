@@ -20,9 +20,3 @@ ActiveRecord::Base.connection.reset_pk_sequence!('transactions');
 
 u1 = User.create(username: 'demoUser', email: 'demoUser@email.com', password:'password123', money: 5000.00);
 u2 = User.create(username: 'parfittChris', email: 'parfittChris@email.com', password:'password123', money: 5000.00);
-
-s1 = Stock.create(name: 'CMP', quantity: 10, user_id: 1);
-s2 = Stock.create(name: 'FB', quantity: 50, user_id: 1);
-s3 = Stock.create(name: 'CMP', quantity: 50, user_id: 2);
-s5 = Stock.create(name: 'FB', quantity: 50, user_id: 2);
-
