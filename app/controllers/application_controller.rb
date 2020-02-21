@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user, :logged_in?
 
+    # These methods work with the session and user controllers to control user login/access to site
+
     def login!(user)
         session[:session_token] = user.session_token
     end

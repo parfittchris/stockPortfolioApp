@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import { PersistGate } from 'redux-persist/integration/react';
-import { store }  from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor }  from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
     window.getState = store.getState;    
@@ -12,11 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root')
     const app = (
 
+        // React persist allows state to save during page refreshes
+
         <Provider store={store}>
             <HashRouter>
-                {/* <PersistGate persistor={persistor}> */}
+                <PersistGate persistor={persistor}>
                     <App />
-                {/* </PersistGate> */}
+                </PersistGate>
             </HashRouter>
         </Provider>
     )

@@ -26,17 +26,6 @@ class StockBuyPage extends React.Component {
     this.props.refresh();
   }
 
-  setActive(e) {
-    let target = e.currentTarget;
-    let current = document.getElementsByClassName('activeComponent');
-
-    for (let i = 0; i < current.length; i++) {
-      current[i].classList.remove('activeComponent');
-    }
-
-    target.classList.add('activeComponent');
-  }
-
   purchase(e) {
     e.preventDefault();
     const quantity = parseInt(document.getElementById("purchaseQty").value);
@@ -53,7 +42,7 @@ class StockBuyPage extends React.Component {
       if (allTickers.includes(stock.name)) {
           this.props.updateCurrentStock(stock).then(this.refresh);
       } else {
-          this.props.buyNewStock(stock);
+          this.props.buyNewStock(stock).then(this.refresh);
       }
 
       const transaction = {
@@ -68,6 +57,7 @@ class StockBuyPage extends React.Component {
     }
   }
 
+  // Calls IEX API to search for stock ticker
   getStock(e) {
     e.preventDefault()
     const stock = document.getElementById('searchInput').value;
@@ -79,6 +69,8 @@ class StockBuyPage extends React.Component {
     }).fail(() => alert('Stock not found'));
   }
 
+
+  // A compnay is shown on the page if it has successfully been found in the api
   renderCompany() {
     if (this.state.stock.companyName) {
       return (
@@ -114,7 +106,7 @@ class StockBuyPage extends React.Component {
 
   render() {
     return (
-      <div id='stockBuyComponent' onClick={this.setActive.bind(this)}>
+      <div id='stockBuyComponent'>
         <div className="componentTop">
           <p className="changeButton">Buy Stocks |<button onClick={this.changeForm.bind(this)}>Transactions</button></p>
           <h3 id="transactionTitle">Buy Stocks</h3>

@@ -45,7 +45,7 @@ class SplashPage extends React.Component {
     this.props.login({ username: 'demoUser', password: 'password123' });
   }
 
-
+  // Renders sign in or login form based on current state
   changeForm() {
     let word = this.state.type === 'Login' ? 'Sign Up' : 'Login';
 
@@ -65,6 +65,8 @@ class SplashPage extends React.Component {
     this.setState(change);
   }
 
+
+  // Converts errors in state into error that will be shown on screen
   renderErrors() {
     let bubble = document.getElementById('errorsBubble');
 

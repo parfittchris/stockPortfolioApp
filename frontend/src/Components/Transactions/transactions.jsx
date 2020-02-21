@@ -22,6 +22,8 @@ class TransactionPage extends React.Component {
         })
     }
 
+
+    // Builds table based on all transactions received from database 'GET' request
     buildTable() {
         const table = document.getElementById('transactionsTable');
 

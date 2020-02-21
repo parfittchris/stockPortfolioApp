@@ -15,19 +15,30 @@ class Wallet extends React.Component {
     };
 
     this.refresh = this.refresh.bind(this);
+    this.removeRow = this.removeRow.bind(this);
+  }
+
+  removeRow(stock) {
+    let row = document.getElementById(`stock-${stock.name}`)
+    row.parentNode.removeChild(row);
+    this.buildTable.bind(this);
   }
 
   componentDidMount() {
     const user = this.props.currentUser[this.props.userId];
 
-    this.setState({
-      username: user.username,
-      email: user.email,
-      money: user.money,
-      stockNames: user.followed_stocks
-    }, () => this.buildTable());
+    this.setState(
+      {
+        username: user.username,
+        email: user.email,
+        money: user.money,
+        stockNames: user.followed_stocks
+      },
+      () => this.buildTable()
+    );
   }
 
+  //Builds Users stocks table by generating rows from GET results
   buildTable() {
     let table = document.getElementById('portfolioTable');
     let value = 0;
@@ -50,49 +61,50 @@ class Wallet extends React.Component {
         this.props.fetchStock(stock.name).then(res => {
           value += res.stock.latestPrice * stock.quantity;
           allStocks.push(res);
-          let stockClass
-          if (res.stock.latestPrice > (res.stock['open'] || res.stock['previousClose'])) {
+          let stockClass;
+          if (
+            res.stock.latestPrice >
+            (res.stock['open'] || res.stock['previousClose'])
+          ) {
             stockClass = 'highPrice';
-          } else if (res.stock.latestPrice < (res.stock['open'] || res.stock['previousClose'])) {
+          } else if (
+            res.stock.latestPrice <
+            (res.stock['open'] || res.stock['previousClose'])
+          ) {
             stockClass = 'lowPrice';
           } else {
-            stockClass = 'stockPrice'
+            stockClass = 'stockPrice';
           }
-
           let row = document.createElement('tr');
           row.classList.add('stockRow');
           row.setAttribute('data-name', res.stock.companyName);
+          row.setAttribute('id', `stock-${res.stock.symbol}`);
+
           row.innerHTML = `
                       <td class="stockName">${res.stock.symbol}</td>
                       <td class="stockQty" >${stock.quantity}</td>
-                      <td class="${stockClass}">$${res.stock.latestPrice.toFixed(2)}</td>
-                      <td class="totalPrice">$${(res.stock.latestPrice.toFixed(2) * stock.quantity).toFixed(2)}</td>`;
+                      <td class="${stockClass}">$${res.stock.latestPrice.toFixed(
+            2
+          )}</td>
+                      <td class="totalPrice">$${(
+                        res.stock.latestPrice.toFixed(2) * stock.quantity
+                      ).toFixed(2)}</td>`;
           row.onclick = this.selectStock.bind(this);
           table.appendChild(row);
-          
+
           this.setState({
-            value: value.toFixed(2),
+            value: value.toFixed(2)
           });
         });
       });
 
-      this.setState({ 
+      this.setState({
         stocks: allStocks
       });
     }
   }
 
-  setActive(e) {
-    let target = e.currentTarget;
-    let current = document.getElementsByClassName("activeComponent");
-
-    for (let i = 0; i < current.length; i++) {
-      current[i].classList.remove("activeComponent");
-    }
-
-    target.classList.add('activeComponent');
-  }
-
+  //Identifies specific stock user clicks to set up for selling
   selectStock(e) {
     const section = document.getElementsByClassName('stockSection')[0];
 
@@ -110,48 +122,68 @@ class Wallet extends React.Component {
 
     selected['quantity'] = qty;
 
-    this.setState({ 
+    this.setState({
       selected
     });
   }
 
+  //Sell Form only shows if a stock has been selected
   sellForm() {
-      if (this.state.selected) {
-        return (
-          <form id="sellForm" onSubmit={this.handleSubmit.bind(this)} autoComplete="off">
-            <h3>Sell {this.state.selected.stock['companyName']} Shares</h3>
-            <p>Opening Price: ${this.state.selected.stock['open'] || this.state.selected.stock['previousClose']} | Current Share Price: ${this.state.selected.stock['latestPrice']}</p>
-            <p> Current Shares: {this.state.selected['quantity']}</p>
-            <label>How many shares do you want to sell?</label>
-            <input id="sellInput" type='number'/>
-            <button type="submit" id="sellButton">Sell</button>
-          </form>
-        );
-      }
+    if (this.state.selected) {
+      return (
+        <form
+          id='sellForm'
+          onSubmit={this.handleSubmit.bind(this)}
+          autoComplete='off'
+        >
+          <h3>Sell {this.state.selected.stock['companyName']} Shares</h3>
+          <p>
+            Opening Price: $
+            {this.state.selected.stock['open'] ||
+              this.state.selected.stock['previousClose']}{' '}
+            | Current Share Price: ${this.state.selected.stock['latestPrice']}
+          </p>
+          <p> Current Shares: {this.state.selected['quantity']}</p>
+          <label>How many shares do you want to sell?</label>
+          <input id='sellInput' type='number' />
+          <button type='submit' id='sellButton'>
+            Sell
+          </button>
+        </form>
+      );
+    }
   }
 
+  // Redirects back to index page
   redirect(e) {
-    this.props.history.push('/index')
+    this.props.history.push('/index');
   }
 
+  //Refreshes table so current results are shown
   refresh() {
-    this.props.refresh()
+    this.props.refresh();
   }
 
+  //signs out from profile page
+  signOut() {
+    this.props.logout();
+  }
+
+  //Sells Stock via post request to transactions controller and 'DELETE' or 'PATCH' request to Stocks controller
   handleSubmit(e) {
-    const sellQuantity = parseInt(document.getElementById("sellInput").value);
+    const sellQuantity = parseInt(document.getElementById('sellInput').value);
     const userQuantity = parseInt(this.state.selected.quantity);
 
     if (sellQuantity <= userQuantity) {
       const stock = {
         name: this.state.selected.stock.symbol,
-        quantity: (sellQuantity * -1),
+        quantity: sellQuantity * -1,
         user_id: this.props.userId,
-        price: this.state.selected.stock.latestPrice,
+        price: this.state.selected.stock.latestPrice
       };
 
       if (sellQuantity === userQuantity) {
-        this.props.sellAllStock(stock).then(this.refresh);
+        this.props.sellAllStock(stock).then(this.removeRow(stock))
       } else {
         this.props.updateCurrentStock(stock).then(this.refresh);
       }
@@ -162,22 +194,21 @@ class Wallet extends React.Component {
         quantity: sellQuantity,
         price: this.state.selected.stock.latestPrice,
         stock: this.state.selected.stock.symbol
-      }
+      };
 
       this.props.createTransaction(transaction);
+    } else {
+      alert("You don't own that much stock.");
     }
-  }
-
-  signOut() {
-    this.props.logout();
+    
   }
 
   render() {
     return (
-      <div id='walletComponent' onClick={this.setActive.bind(this)}>
+      <div id='walletComponent'>
         <div id='walletContents'>
           <div className='userImage' />
-          <div className="walletTopButtons">
+          <div className='walletTopButtons'>
             <button onClick={this.redirect.bind(this)}>Index</button>
             <button onClick={this.signOut.bind(this)}>Log Out</button>
           </div>

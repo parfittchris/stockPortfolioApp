@@ -1,7 +1,6 @@
 import { login, logout } from '../util/session_util';
 import { LOGIN_USER, LOGOUT_USER, RECEIVE_ERRORS, REMOVE_ERRORS } from './types';
 
-
 export const loginUser = user => dispatch => login(user)
             .then(res => dispatch({
                 type: LOGIN_USER,

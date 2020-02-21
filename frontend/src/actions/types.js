@@ -1,3 +1,6 @@
+
+// This file ensures that incorrect actions produce errors instead of just not working
+
 export const LOGOUT_USER = 'LOGOUT';
 export const LOGIN_USER = 'LOGIN';
 export const SIGNUP_USER = 'SIGNUP_USER';

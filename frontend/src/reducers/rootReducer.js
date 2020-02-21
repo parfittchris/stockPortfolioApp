@@ -21,6 +21,5 @@ const rootReducer = combineReducers({
     transactionsReducer
 });
 
-// export default persistReducer(persistConfig, rootReducer);
+export default persistReducer(persistConfig, rootReducer);
 
-export default rootReducer

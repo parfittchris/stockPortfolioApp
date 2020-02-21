@@ -18,6 +18,7 @@ class userProfile extends React.Component {
       this.refresh = this.refresh.bind(this);
     }
 
+    // Refreshes page to show changes represented in the database
     refresh() {
       window.location.reload();
     }
@@ -39,7 +40,8 @@ class userProfile extends React.Component {
             });
         }
     }
-
+    
+    // Determines whether buy page or transaction page is showing
     renderComponent() {
       if (this.state.component === 'buyPage') {
         return <StockBuyPage user={this.state.user} company={'FB'} setType={this.setType} refresh={this.refresh}/>
