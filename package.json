@@ -1,6 +1,5 @@
 {
   "name": "stockportfolio",
-  "private": true,
   "dependencies": {},
   "engines": {
     "node": "10.15.3",
