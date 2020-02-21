@@ -28,4 +28,8 @@ class ApplicationController < ActionController::Base
     def require_logged_in
         redirect_to api_session unless logged_in?
     end
+
+    def fallback_index_html
+        render :file => 'public/index.html'
+    end
 end

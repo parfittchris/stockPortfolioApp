@@ -8,4 +8,8 @@ Rails.application.routes.draw do
     resources :transactions, only: [:create, :index]
     resource :session, only: [:create, :destroy, :show]
   end
+
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end
