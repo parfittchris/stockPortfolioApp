@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
     helper_method :current_user, :logged_in?
 
     # These methods work with the session and user controllers to control user login/access to site
