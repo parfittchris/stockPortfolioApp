@@ -1,2 +1,1 @@
-web: cd frontend npm start
-api: bundle exec rails s
+web: bundle exec rails s
