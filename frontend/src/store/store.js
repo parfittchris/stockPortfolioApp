@@ -8,6 +8,7 @@ const initialState = {};
 const middleware = [thunk];
 
 export const store = createStore(rootReducer, initialState, applyMiddleware(...middleware));
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
 
-export default { persistor, store };
+// export default { persistor, store };
+export default store;
