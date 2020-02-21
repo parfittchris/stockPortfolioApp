@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy, :show]
   end
 
+  get '/*path', to: 'react#index'
 end
