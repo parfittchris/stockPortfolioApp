@@ -1,14 +1,14 @@
 {
   "name": "stockportfolio",
   "dependencies": {},
-  
+  "homepage": "https://stockwalletapp.herokuapp.com/",
   "engines": {
     "node": "10.15.3",
     "yarn": "1.15.2"
   },
   "scripts": {
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
-    "deploy": "cp -a client/build/. public/",
+    "deploy": "cp -a frontend/build/. public/",
     "heroku-postbuild": "yarn build && yarn deploy"
   }
 }
