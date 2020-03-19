@@ -4,7 +4,7 @@ import App from './App';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor }  from './store/store';
+import store from './store/store';
 
 document.addEventListener('DOMContentLoaded', () => {
     window.getState = store.getState;    
@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <Provider store={store}>
             <HashRouter>
-                <PersistGate persistor={persistor}>
+                {/* <PersistGate persistor={persistor}> */}
                     <App />
-                </PersistGate>
+                {/* </PersistGate> */}
             </HashRouter>
         </Provider>
     )

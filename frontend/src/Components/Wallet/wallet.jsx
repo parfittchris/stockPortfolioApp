@@ -185,7 +185,7 @@ class Wallet extends React.Component {
       if (sellQuantity === userQuantity) {
         this.props.sellAllStock(stock).then(this.removeRow(stock))
       } else {
-        this.props.updateCurrentStock(stock).then(this.refresh);
+        this.props.updateCurrentStock(stock).then(this.refresh());
       }
 
       const transaction = {
